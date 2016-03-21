@@ -87,7 +87,7 @@ public class Model {
     }
 
     public void setLowX(float lowX) {
-        this.lowX = lowX;
+        this.lowX += lowX;
     }
 
     public float getLowY() {
@@ -95,7 +95,7 @@ public class Model {
     }
 
     public void setLowY(float lowY) {
-        this.lowY = lowY;
+        this.lowY += lowY;
     }
 
     public float getHighX() {
@@ -103,7 +103,7 @@ public class Model {
     }
 
     public void setHighX(float highX) {
-        this.highX = highX;
+        this.highX += highX;
     }
 
     public float getHighY() {
@@ -111,6 +111,6 @@ public class Model {
     }
 
     public void setHighY(float highY) {
-        this.highY = highY;
+        this.highY += highY;
     }
 }

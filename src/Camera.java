@@ -15,6 +15,7 @@ public class Camera {
     private float pitch;
     private float yaw;
     private float roll;
+    protected float aspectRatio;
 
     public Camera(Shader shader) {
         shader.start();
@@ -23,7 +24,7 @@ public class Camera {
     }
 
     private Matrix4f createProjectionMatrix(){
-        float aspectRatio = (float) Display.getWidth() / (float) Display.getHeight();
+        aspectRatio = (float) Display.getWidth() / (float) Display.getHeight();
         float y_scale = (float) ((1f / Math.tan(Math.toRadians(FOV/2f))) * aspectRatio);
         float x_scale = y_scale / aspectRatio;
         float frustum_length = farPlane - nearPlane;

@@ -37,6 +37,10 @@ public class Sprite {
         position.x += velocities.x;
         position.y += velocities.y;
         position.z += velocities.z;
+        model.setLowX(velocities.x);
+        model.setLowY(velocities.y);
+        model.setHighY(velocities.y);
+        model.setHighX(velocities.x);
     }
 
     public Vector3f getVelocities() {
@@ -51,7 +55,11 @@ public class Sprite {
         position.x += x;
         position.y += y;
         position.z += z;
-        model.incXYDimensions(x, y);
+        model.setLowX(x);
+        model.setLowY(y);
+        model.setHighY(y);
+        model.setHighX(x);
+//        model.incXYDimensions(x, y);
     }
     
     public void rotate(float rx, float ry, float rz) {

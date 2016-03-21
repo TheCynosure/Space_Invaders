@@ -46,21 +46,23 @@ public class Main {
         OBJLoader loader = new OBJLoader();
         ArrayList<Sprite> bullets =  new ArrayList<Sprite>();
         Model bulletModel = loader.loadObjModel("res/Orange_Box.obj", "res/Orange_Texture.png", "PNG");
-        Sprite spaceInvader1 = new Sprite(loader.loadObjModel("res/SIFixed.obj", "res/Orange_Texture.png", "PNG"));
+        ArrayList<Sprite> gameObjects = new ArrayList<Sprite>();
+        for (int i = 0; i < 5; i++) {
+            Model model = loader.loadObjModel("res/SIFixed.obj", "res/Orange_Texture.png", "PNG");
+            SpaceInvader spaceInvader1 = new SpaceInvader(model);
+            spaceInvader1.scale(0.025f);
+            spaceInvader1.translate(i *  model.getWidth(), 10 - model.getHeight(), -30);
+            spaceInvader1.color = new Vector4f((float)(Math.random()), (float)(Math.random()), (float)(Math.random()), 1);
+            gameObjects.add(spaceInvader1);
+        }
         Sprite spaceShip = new Sprite(loader.loadObjModel("res/ship.obj", "res/Orange_Texture.png", "PNG"));
         Sprite secret = new Sprite(modelLoader.createModel(vertices, textureCoords, indices, new Texture("res/secret.png", "PNG"), 0, 0, 0, 0));
         Shader shader = new Shader("shaders/vertexShader.vshr", "shaders/fragmentShader.fshr");
-        ArrayList<Sprite> gameObjects = new ArrayList<Sprite>();
-        gameObjects.add(spaceInvader1);
         gameObjects.add(spaceShip);
-        gameObjects.add(secret);
         Camera camera = new Camera(shader);
-        spaceInvader1.scale(0.025f);
         spaceShip.scale(0.15f);
-        spaceInvader1.translate(0,0,-30);
         spaceShip.translate(0,-15,-30);
         spaceShip.rotate(0, 90, 0);
-        spaceInvader1.color = new Vector4f(1, 0.1f, 1f, 1);
         spaceShip.color = new Vector4f(1f, 1f, 1f, 1);
         secret.translate(-1.5f, 0, -1);
         secret.rotate(0, 65, 0);
@@ -69,6 +71,7 @@ public class Main {
             window.clean();
             shader.start();
             explosions.check(shader, camera);
+            secret.render(shader, camera);
             for (int i = 0; i < bullets.size(); i++) {
                 Sprite bullet = bullets.get(i);
                 bullet.move();

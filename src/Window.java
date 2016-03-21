@@ -6,7 +6,7 @@ import org.lwjgl.opengl.*;
  */
 public class Window {
 
-    private int WIDTH, HEIGHT;
+    protected final int WIDTH, HEIGHT;
 
     public Window(int WIDTH, int HEIGHT, String title) {
         this.WIDTH = WIDTH;
