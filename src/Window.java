@@ -6,7 +6,7 @@ import org.lwjgl.opengl.*;
  */
 public class Window {
 
-    protected final int WIDTH, HEIGHT;
+    private int WIDTH, HEIGHT;
 
     public Window(int WIDTH, int HEIGHT, String title) {
         this.WIDTH = WIDTH;
@@ -23,7 +23,7 @@ public class Window {
             Display.create(new PixelFormat(), contextAttribs);
             //Initializing the OpenGL and Background Color.
             GL11.glViewport(0, 0, WIDTH, HEIGHT);
-            GL11.glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
+            GL11.glClearColor(1.0f, 0.0f, 0.0f, 1.0f);
         } catch (LWJGLException e) {
             e.printStackTrace();
         }
@@ -34,7 +34,7 @@ public class Window {
     }
 
     public void update() {
-        Display.sync(30);
+        Display.sync(60);
         Display.update();
     }
 

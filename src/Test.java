@@ -17,9 +17,9 @@ public class Test {
         ArrayList<Sprite> projectiles = new ArrayList<Sprite>();
         Window window = new Window(1000 , 600, "Game Testing");
         OBJLoader loader = new OBJLoader();
-        Sprite ship = new Sprite(loader.loadObjModel("res/booklow.obj", "res/Orange_Texture.png", "PNG"));
-        Sprite shield = new Sprite(loader.loadObjModel("res/booklow.obj", "res/Orange_Texture.png", "PNG"));
-        Model projectileModel = loader.loadObjModel("res/booklow.obj",  "res/Orange_Texture.png", "PNG");
+        Sprite ship = new Sprite(loader.loadObjModel("res/CAR.obj", "res/Orange_Texture.png", "PNG"));
+        Sprite shield = new Sprite(loader.loadObjModel("res/Sphere.obj", "res/Orange_Texture.png", "PNG"));
+        Model projectileModel = loader.loadObjModel("res/Sphere.obj",  "res/Orange_Texture.png", "PNG");
         GL30.glBindVertexArray(ship.getModel().getVaoID());
         Shader shader = new Shader("shaders/vertexShader.vshr", "shaders/fragmentShader.fshr");
         GL30.glBindVertexArray(0);

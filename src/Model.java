@@ -9,41 +9,10 @@ public class Model {
     private int indicesBufferID;
     private Texture texture;
 
-    private float lowX = 0, lowY = 0, highX = 0, highY = 0;
-
     public Model(int vaoID, int indicesBufferID, int vertexCount, Texture texture) {
         this.indicesBufferID = indicesBufferID;
         this.vaoID = vaoID;
         this.vertexCount = vertexCount;
-        this.texture = texture;
-    }
-
-    public Model(int vaoID, int indicesBufferID, int vertexCount, Texture texture, float lowX, float lowY, float highX, float highY) {
-        this.indicesBufferID = indicesBufferID;
-        this.vaoID = vaoID;
-        this.vertexCount = vertexCount;
-        this.texture = texture;
-        this.lowX = lowX;
-        this.lowY = lowY;
-        this.highX = highX;
-        this.highY = highY;
-    }
-
-    public void scaleXY(float scale) {
-        lowX *= scale;
-        lowY *= scale;
-        highX *= scale;
-        highY *= scale;
-    }
-
-    public void incXYDimensions(float x, float y) {
-        lowX += x;
-        highX += x;
-        lowY += y;
-        highY += y;
-    }
-
-    public void setTexture(Texture texture) {
         this.texture = texture;
     }
 
@@ -70,47 +39,7 @@ public class Model {
         GL30.glBindVertexArray(0);
     }
 
-    public float getWidth() {
-        return highX - lowX;
-    }
-
-    public float getHeight() {
-        return highY - lowY;
-    }
-
     public int getVaoID() {
         return vaoID;
-    }
-
-    public float getLowX() {
-        return lowX;
-    }
-
-    public void setLowX(float lowX) {
-        this.lowX += lowX;
-    }
-
-    public float getLowY() {
-        return lowY;
-    }
-
-    public void setLowY(float lowY) {
-        this.lowY += lowY;
-    }
-
-    public float getHighX() {
-        return highX;
-    }
-
-    public void setHighX(float highX) {
-        this.highX += highX;
-    }
-
-    public float getHighY() {
-        return highY;
-    }
-
-    public void setHighY(float highY) {
-        this.highY += highY;
     }
 }

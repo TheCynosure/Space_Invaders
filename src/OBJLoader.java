@@ -20,7 +20,6 @@ public class OBJLoader {
     }
 
     public Model loadObjModel(String fileName, String texturePath, String type) {
-        float lowestX = 0, highestX = 0,lowestY = 0, highestY = 0;
         FileReader fr = null;
         System.out.print("Loading - " + fileName);
         try {
@@ -48,20 +47,7 @@ public class OBJLoader {
                 String[] currentLine = line.split(" ");
                 if(!line.isEmpty() && line.length() > 2) {
                     if (currentLine[0].equals("v")) {
-                        float x = Float.parseFloat(currentLine[1]);
-                        float y = Float.parseFloat(currentLine[2]);
-                        if(x < lowestX) {
-                            lowestX = x;
-                        } else if(x > highestX) {
-                            highestX = x;
-                        }
-
-                        if(y < lowestY) {
-                            lowestY = y;
-                        } else if(y > highestY) {
-                            highestY = y;
-                        }
-                        Vector3f vertex = new Vector3f(x, y, Float.parseFloat(currentLine[3]));
+                        Vector3f vertex = new Vector3f(Float.parseFloat(currentLine[1]), Float.parseFloat(currentLine[2]), Float.parseFloat(currentLine[3]));
                         vertices.add(vertex);
                     } else if (line.startsWith("vt ")) {
                         Vector2f texture = new Vector2f(Float.parseFloat(currentLine[1]), Float.parseFloat(currentLine[2]));
@@ -84,16 +70,7 @@ public class OBJLoader {
                 }
                 String[] currentLine = line.split(" ");
 
-                if(currentLine[1].contains("//")) {
-                    String[] vertex1 = currentLine[1].split("//");
-                    String[] vertex2 = currentLine[2].split("//");
-                    String[] vertex3 = currentLine[3].split("//");
-
-                    processVertex(vertex1, indices, textures, normals, textureArray, normalsArray);
-                    processVertex(vertex2, indices, textures, normals, textureArray, normalsArray);
-                    processVertex(vertex3, indices, textures, normals, textureArray, normalsArray);
-                }
-                if(currentLine[1].contains("/")){
+                if(currentLine[1].contains("/") && currentLine[0].equals("f")){
 
                     String[] vertex1 = currentLine[1].split("/");
                     String[] vertex2 = currentLine[2].split("/");
@@ -134,7 +111,7 @@ public class OBJLoader {
             indicesArray[i] = indices.get(i);
         }
         System.out.println(" - Finished");
-        return modelLoader.createModel(verticesArray, textureArray, indicesArray, new Texture(texturePath, type), lowestX, lowestY, highestX, highestY);
+        return modelLoader.createModel(verticesArray, textureArray, indicesArray, new Texture(texturePath, type));
     }
 
     private void processVertex(String[] vertexData, List<Integer> indices, List<Vector2f> textures, List<Vector3f> normals, float[] textureArray, float[] normalsArray) {

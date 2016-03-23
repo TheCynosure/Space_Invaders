@@ -27,13 +27,13 @@ public class ModelLoader {
         vbos = new ArrayList<Integer>();
     }
 
-    public Model createModel(float[] data, float[] textures, int[] indices, Texture texture, float lowX, float lowY, float highX, float highY) {
+    public Model createModel(float[] data, float[] textures, int[] indices, Texture texture) {
         int vaoID = createVAO();
         storeDataInVBO(data, 0, 3);
         storeDataInVBO(textures, 1, 2);
         unbindVAO();
         int indicesID = storeIndicesInVBO(indices);
-        return new Model(vaoID, indicesID, indices.length, texture, lowX, lowY, highX, highY);
+        return new Model(vaoID, indicesID, indices.length, texture);
     }
 
     private int createVAO() {

@@ -9,13 +9,12 @@ import org.lwjgl.util.vector.Vector3f;
 public class Camera {
 
     private final int FOV = 70;
-    private final float nearPlane = 0.5f;
-    private final float farPlane = 10000;
-    public Vector3f position = new Vector3f(0,0,0);
+    private final float nearPlane = 0.1f;
+    private final float farPlane = 1000f;
+    private Vector3f position = new Vector3f(0,0,0);
     private float pitch;
     private float yaw;
     private float roll;
-    protected float aspectRatio;
 
     public Camera(Shader shader) {
         shader.start();
@@ -24,7 +23,7 @@ public class Camera {
     }
 
     private Matrix4f createProjectionMatrix(){
-        aspectRatio = (float) Display.getWidth() / (float) Display.getHeight();
+        float aspectRatio = (float) Display.getWidth() / (float) Display.getHeight();
         float y_scale = (float) ((1f / Math.tan(Math.toRadians(FOV/2f))) * aspectRatio);
         float x_scale = y_scale / aspectRatio;
         float frustum_length = farPlane - nearPlane;
@@ -53,13 +52,6 @@ public class Camera {
         pitch += rx;
         yaw += ry;
         roll += rz;
-    }
-
-    public void center() {
-        position = new Vector3f(0,0,0);
-        pitch = 0;
-        yaw = 0;
-        roll = 0;
     }
 
 }
