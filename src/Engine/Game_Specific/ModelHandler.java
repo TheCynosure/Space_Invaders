@@ -20,6 +20,7 @@ public class ModelHandler {
         enemies[2] = ResourceHandler.OBJ_LOADER.loadObjModel("res/models/enemies/Space_Invader_2.obj", "res/textures/blank_tex.png", "PNG");
         player = ResourceHandler.OBJ_LOADER.loadObjModel("res/models/ship.obj", "res/textures/blank_tex.png", "PNG");
         projectile = ResourceHandler.OBJ_LOADER.loadObjModel("res/models/box.obj", "res/textures/blank_tex.png", "PNG");
+        projectile.scaleXY(0.15f);
     }
 
     public void scaleEnemies(float scale) {

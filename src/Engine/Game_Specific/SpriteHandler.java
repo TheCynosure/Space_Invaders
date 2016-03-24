@@ -12,13 +12,15 @@ import java.util.ArrayList;
 public class SpriteHandler {
 
     private Explosions explosions;
-    private ArrayList<Sprite> bullets;
+    private ArrayList<Sprite> playerBullets;
     private ArrayList<Sprite> gameObjects;
+    private ArrayList<Sprite> enemyBullets;
     private Sprite spaceShip, secret;
 
     public SpriteHandler(ModelHandler modelHandler) {
         explosions = new Explosions();
-        bullets = new ArrayList<Sprite>();
+        playerBullets = new ArrayList<Sprite>();
+        enemyBullets = new ArrayList<Sprite>();
         gameObjects = new ArrayList<Sprite>();
         spaceInvaderSetup(modelHandler);
         spaceShip = new Sprite(modelHandler.getPlayer());
@@ -37,7 +39,7 @@ public class SpriteHandler {
                 }
                 SpaceInvader spaceInvader1 = new SpaceInvader(modelHandler.getEnemies()[rows], i, 10 - rows * modelHandler.getEnemies()[0].getHeight(), -30, v, 0);
                 spaceInvader1.scale(0.025f);
-                spaceInvader1.color = new Vector4f(1, 0, 0, 1);
+                spaceInvader1.color = new Vector4f(0, 0.75f, 0, 1);
                 gameObjects.add(spaceInvader1);
             }
         }
@@ -60,8 +62,12 @@ public class SpriteHandler {
         return explosions;
     }
 
-    public ArrayList<Sprite> getBullets() {
-        return bullets;
+    public ArrayList<Sprite> getPlayerBullets() {
+        return playerBullets;
+    }
+
+    public ArrayList<Sprite> getEnemyBullets() {
+        return enemyBullets;
     }
 
     public ArrayList<Sprite> getGameObjects() {

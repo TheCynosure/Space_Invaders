@@ -18,7 +18,7 @@ public class Explosions {
     }
 
     public void addExplosion(Model baseModel, Vector4f color, float x, float y, float z) {
-        explosions.add(new ParticleSystem3(baseModel, color, x, y, z));
+        explosions.add(new ParticleSystem3(baseModel, color, 25, x, y, z));
     }
 
     public void check(Shader shader, Camera camera) {

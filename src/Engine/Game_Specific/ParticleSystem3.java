@@ -13,12 +13,11 @@ public class ParticleSystem3 {
     private Sprite[] particles;
     public int life = 25;
 
-    public ParticleSystem3(Model baseModel, Vector4f color, float startX, float startY, float startZ) {
-        particles = new Sprite[]{
-                new Sprite(baseModel, startX, startY,startZ),
-                new Sprite(baseModel, startX, startY,startZ),
-                new Sprite(baseModel, startX, startY,startZ)
-        };
+    public ParticleSystem3(Model baseModel, Vector4f color, int numOfParts, float startX, float startY, float startZ) {
+        particles = new Sprite[numOfParts];
+        for(int i =0; i < numOfParts; i++) {
+            particles[i] = new Sprite(baseModel, startX, startY, startZ);
+        }
         for(Sprite sprite: particles) {
             sprite.color = color;
             sprite.scale(0.25f);

@@ -1,5 +1,6 @@
 package Engine;
 
+import org.lwjgl.opengl.GL11;
 import org.lwjgl.util.vector.Matrix4f;
 import org.lwjgl.util.vector.Vector3f;
 import org.lwjgl.util.vector.Vector4f;
@@ -15,6 +16,7 @@ public class Sprite {
     private float scale = 1;
     public Vector4f color = new Vector4f(1,1,1,1);
     protected float lowX, lowY, highX, highY;
+    public boolean dead = false;
 
     public Sprite(Model model) {
         this.model = model;
@@ -94,6 +96,10 @@ public class Sprite {
         shader.loadMatrix(shader.transformMatrixID, transformMatrix());
         shader.loadFloat(shader.scaleID, scale);
         model.render();
+    }
+
+    public boolean checkCollision(Sprite other) {
+        return other.getPosition().x >= lowX && other.getPosition().x <= highX && other.getPosition().y <= highY && other.getPosition().y >= lowY;
     }
 
     public Vector3f getPosition() {
