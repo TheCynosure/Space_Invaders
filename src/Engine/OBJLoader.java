@@ -15,14 +15,12 @@ import java.util.List;
 public class OBJLoader {
 
     public Model loadObjModel(String fileName, String texturePath, String type) {
-        ModelLoader modelLoader = new ModelLoader();
         float lowestX = 0, highestX = 0,lowestY = 0, highestY = 0;
         FileReader fr = null;
-        System.out.print("Loading - " + fileName);
         try {
             fr = new FileReader(new File(fileName));
         } catch(FileNotFoundException e) {
-            System.out.println("Couldn't load file!");
+            System.out.println("Couldn't load file: " + fileName);
             e.printStackTrace();
         }
         BufferedReader reader = new BufferedReader(fr);
@@ -129,7 +127,6 @@ public class OBJLoader {
         for(int i = 0; i < indices.size(); i++) {
             indicesArray[i] = indices.get(i);
         }
-        System.out.println(" - Finished");
         return ResourceHandler.MODEL_LOADER.createModel(verticesArray, textureArray, indicesArray, new Texture(texturePath, type), lowestX, lowestY, highestX, highestY);
     }
 

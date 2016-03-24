@@ -1,9 +1,6 @@
 package Engine;
 
 import Engine.Game_Specific.AudioThread;
-import Engine.ModelLoader;
-import Engine.OBJLoader;
-import Engine.Window;
 import org.lwjgl.opengl.Display;
 
 /**

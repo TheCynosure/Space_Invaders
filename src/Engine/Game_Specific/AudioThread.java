@@ -15,14 +15,14 @@ public class AudioThread extends Thread {
     public AudioThread() {
         Toolkit.getToolkit().init();
         laser = new AudioClip(new File("res/sound/laser.wav").toURI().toString());
-        laser.setVolume(0.25);
+        laser.setVolume(0.15);
         explosion = new AudioClip(new File("res/sound/blast.wav").toURI().toString());
-        explosion.setVolume(0.5);
+        explosion.setVolume(0.15);
     }
 
     public void run() {
         AudioClip clip = new AudioClip(new File("res/sound/techno.wav").toURI().toString());
-        clip.setVolume(0.5);
+        clip.setVolume(0.25);
         clip.setCycleCount(AudioClip.INDEFINITE);
         clip.play();
     }

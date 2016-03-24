@@ -35,7 +35,11 @@ public class Main {
         //Creates a Engine.Camera that will control the View Matrix
         Camera camera = new Camera(shader);
 
-        System.out.println("Finished!");
+        System.out.println("LowX: " + spriteHandler.getSpaceShip().getLowX());
+        System.out.println("LowY: " + spriteHandler.getSpaceShip().getLowY());
+        System.out.println("HighX: " + spriteHandler.getSpaceShip().getHighX());
+        System.out.println("HighY: " + spriteHandler.getSpaceShip().getHighY());
+
         while(!Display.isCloseRequested()) {
             //Making use of the Depth Buffer.
             GL11.glEnable(GL11.GL_DEPTH_TEST);
@@ -92,29 +96,27 @@ public class Main {
                 }
             }
 
-            for (int i = 0; i < spriteHandler.getEnemyBullets().size(); i++) {
-                //Todo: Fix the collision with the player.
-                Sprite bullet = spriteHandler.getEnemyBullets().get(i);
-                bullet.move();
-                if (bullet.getPosition().y > 20) {
-                    //If off the screen then remove them
-                    spriteHandler.getEnemyBullets().remove(i);
-                    i--;
-                } else if (spriteHandler.getEnemyBullets().size() > 0) {
-                    //If on the screen then draw them
-                    bullet.render(shader, camera);
-                    if(spriteHandler.getSpaceShip().checkCollision(bullet)) {
-                        System.out.println("Hit");
-                        // Make an explosion
-                        //Noise
-                        ResourceHandler.AUDIO_THREAD.explode();
-                        //3D Explosion Particles
-                        spriteHandler.getExplosions().addExplosion(modelHandler.getProjectile(), spriteHandler.getSpaceShip().color, spriteHandler.getSpaceShip().getPosition().x, spriteHandler.getSpaceShip().getPosition().y, spriteHandler.getSpaceShip().getPosition().z);
-                        //Remove object - Dead
-                        spriteHandler.getSpaceShip().dead = true;
-                        //Remove Bullet Useless
-                        spriteHandler.getPlayerBullets().remove(i);
-                        //End the Check loop for this bullet because it is gone.
+            if(!spriteHandler.getSpaceShip().dead) {
+                for (int i = 0; i < spriteHandler.getEnemyBullets().size(); i++) {
+                    Sprite bullet = spriteHandler.getEnemyBullets().get(i);
+                    bullet.move();
+                    if (bullet.getPosition().y > 20) {
+                        //If off the screen then remove them
+                        spriteHandler.getEnemyBullets().remove(i);
+                        i--;
+                    } else if (spriteHandler.getEnemyBullets().size() > 0) {
+                        //If on the screen then draw them
+                        bullet.render(shader, camera);
+                        if (spriteHandler.getSpaceShip().checkCollision(bullet)) {
+                            System.out.println("Hit");
+                            // Make an explosion
+                            //Noise
+                            ResourceHandler.AUDIO_THREAD.explode();
+                            //3D Explosion Particles
+                            spriteHandler.getExplosions().addExplosion(modelHandler.getProjectile(), spriteHandler.getSpaceShip().color, spriteHandler.getSpaceShip().getPosition().x, spriteHandler.getSpaceShip().getPosition().y, spriteHandler.getSpaceShip().getPosition().z);
+                            //Remove object - Dead
+                            spriteHandler.getSpaceShip().dead = true;
+                        }
                     }
                 }
             }

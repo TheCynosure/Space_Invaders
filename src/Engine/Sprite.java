@@ -20,6 +20,10 @@ public class Sprite {
 
     public Sprite(Model model) {
         this.model = model;
+        lowX = model.getLowX();
+        lowY = model.getLowY();
+        highX = model.getHighX();
+        highY = model.getHighY();
     }
 
     public Sprite(Model model, float x, float y, float z) {
